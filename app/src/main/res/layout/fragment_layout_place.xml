@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_place_fragment"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:gravity="center"
+    tools:context="cs.nuim.maps.PlaceFragment"
+    android:orientation="vertical">
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/crime_scene"
+        android:textSize="40dp"
+        android:id="@+id/crimescene"
+        android:textColor="#FFFFFF"
+        android:textAlignment="center" />
+
+    <ImageView
+        android:layout_width="334dp"
+        android:layout_height="332dp"
+        android:src="@drawable/question2"
+        android:id="@+id/imageView"
+        android:layout_marginTop="30dp"/>
+</LinearLayout>

@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">Maps</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="title_activity_close">CloseActivity</string>
+    <string name="clues">Clues</string>
+    <string name="rules">Rules</string>
+    <string name="looking_for_clues">Look for clues...</string>
+    <string name="title_activity_clues2">Clues2Activity</string>
+    <string name="action_settings">Settings</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+    <string name="location">Location</string>
+    <string name="suspects">Suspects</string>
+    <string name="dr_white">Dr. White</string>
+    <string name="janitor_green">Janitor Green</string>
+    <string name="weapons">Weapons</string>
+    <string name="crime_scene">Crime Scene</string>
+
+    <string name="title_activity_splash">SplashActivity</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="mystery_at_maynooth">Mystery at Maynooth</string>
+    <string name="play">Play</string>
+</resources>

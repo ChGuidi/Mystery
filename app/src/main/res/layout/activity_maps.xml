@@ -1,0 +1,102 @@
+<LinearLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="fill_parent"
+    android:layout_width="fill_parent"
+    android:layout_gravity="center_horizontal"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:background="@color/niceRed"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:weightSum="1">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/looking_for_clues"
+        android:layout_gravity="center_horizontal"
+        android:textSize="50dp"
+        android:textStyle="bold"
+        android:layout_marginTop="20dp"
+        android:id="@+id/looking" />
+
+    <FrameLayout
+        android:layout_width="336dp"
+        android:layout_height="396dp"
+        android:layout_marginTop="20dp"
+        >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="3dp">
+
+    <fragment
+        android:id="@+id/map"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        tools:context="cs.nuim.maps.MapsActivity"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        />
+    </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/layout_map"
+            android:orientation="vertical"/>
+
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:orientation="horizontal"
+        android:layout_gravity="center_horizontal">
+
+        <TextView
+            android:text="@string/location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView"
+            android:fontFamily="sans-serif-condensed"
+            android:textStyle="normal|bold"
+            android:textSize="24sp"
+            android:background="@drawable/locationback"
+            android:padding="5dp"
+            android:layout_gravity="center_horizontal"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="30dp">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/clues"
+            android:id="@+id/clues"
+            android:padding="5dp"
+            android:textSize="40sp"
+            android:background="@drawable/buttonclick"
+            android:onClick="goToClues"/>
+
+        <Button
+            android:layout_marginLeft="40dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/buttonclick"
+            android:padding="5dp"
+            android:text="@string/rules"
+            android:id="@+id/rules"
+            android:textSize="40sp"
+            android:onClick="goToRules"/>
+    </LinearLayout>
+
+</LinearLayout>
