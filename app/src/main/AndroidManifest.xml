@@ -54,7 +54,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".StoryActivity"></activity>
+        <activity android:name=".StoryActivity"
+            android:theme="@style/AppTheme.NoTitlebar">
+        </activity>
     </application>
 
 </manifest>

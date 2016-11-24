@@ -20,8 +20,8 @@
         android:id="@+id/looking" />
 
     <FrameLayout
-        android:layout_width="336dp"
-        android:layout_height="396dp"
+        android:layout_width="326dp"
+        android:layout_height="336dp"
         android:layout_marginTop="20dp"
         >
 
@@ -51,7 +51,7 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="20dp"
         android:orientation="horizontal"
         android:layout_gravity="center_horizontal">
 
@@ -83,7 +83,7 @@
             android:text="@string/clues"
             android:id="@+id/clues"
             android:padding="5dp"
-            android:textSize="40sp"
+            android:textSize="30sp"
             android:background="@drawable/buttonclick"
             android:onClick="goToClues"/>
 
@@ -95,7 +95,7 @@
             android:padding="5dp"
             android:text="@string/rules"
             android:id="@+id/rules"
-            android:textSize="40sp"
+            android:textSize="30sp"
             android:onClick="goToRules"/>
     </LinearLayout>
 

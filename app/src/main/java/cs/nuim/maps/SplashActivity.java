@@ -7,8 +7,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
 public class SplashActivity extends AppCompatActivity {
 
     private MediaPlayer my_mediaPlayer;
@@ -29,7 +27,7 @@ public class SplashActivity extends AppCompatActivity {
         Typeface font = Typeface.createFromAsset(getAssets(), "GypsyCurse.ttf");
         tv.setTypeface(font);
 
-        my_mediaPlayer = MediaPlayer.create(this, R.raw.susanvega);
+        my_mediaPlayer = MediaPlayer.create(this, R.raw.squeakingdoor);
         my_mediaPlayer.start();
 
         Thread timer = new Thread(){

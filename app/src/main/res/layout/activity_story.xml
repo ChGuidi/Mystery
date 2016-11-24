@@ -1,26 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_story"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="20dp"
+    android:orientation="vertical"
     android:layout_gravity="center"
+    android:gravity="center"
     android:background="@color/niceRed"
-    tools:context="cs.nuim.maps.StoryActivity">
+    tools:context="cs.nuim.maps.StoryActivity"
+    android:weightSum="1">
 
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        />
-    <Button
-        android:text="@string/play"
-        android:onClick="toGame"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginEnd="112dp"
-        android:layout_marginTop="162dp"
-        android:id="@+id/button2" />
-</RelativeLayout>
+        android:text="@string/what_happened"
+        android:textSize="35sp"
+        android:textColor="#FFFFFF"
+        android:id="@+id/titleStory"/>
+
+    <TextView
+        android:text="Foreword by the inventor's daughter. Was it Professor Plum with the candlestick in the library or Reverend Green with the revolver in the study? Amateur detectives have been creeping around the corridors and secret passages of Tudor Close, solving the murder of the mysterious Dr Black, since 1949. The Story of Cluedo tells how a quiet and unassuming musician from Birmingham invented the world's first murder mystery board game. Through an engaging and very readable narrative based on extensive research and conversations with the inventor's daughter, including never before published photographs and other material from the inventor's personal archive, Jonathan Foster traces the origins of Cluedo. From its beginnings in the early twentieth century through the Second World War, to its enduring popularity in the post-war decades and the game's current status as a permanent fixture "
+        android:layout_width="318dp"
+        android:layout_height="384dp"
+        android:layout_marginTop="30dp"
+        android:id="@+id/textStory"
+        android:textStyle="bold"
+        android:padding="15dp"
+        android:background="@drawable/layout_bg"
+        android:textSize="25sp"
+        android:scrollbars="vertical"
+        android:layout_weight="0.23" />
+
+    <Button
+        android:layout_marginTop="30dp"
+        android:text="@string/play"
+        android:textSize="30sp"
+        android:onClick="toGame"
+        android:background="@drawable/buttonclick"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/buttonPlay" />
+
+
+</LinearLayout>

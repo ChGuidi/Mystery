@@ -138,6 +138,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     public void putLocations() {
         // Instantiates a new CircleOptions object and defines the center and radius
+        // TODO: change color of dots based on Database! + HashMap with locations
         for(String s : locations.keySet()) {
             CircleOptions circleOptions = new CircleOptions()
                     .center(locations.get(s))
