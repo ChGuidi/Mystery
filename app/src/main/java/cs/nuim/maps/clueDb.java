@@ -13,20 +13,20 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class clueDb {
 	
-	public static final String TABLE_NAME = "Clues_DB";
-	public static final String COLUMN_NAME_PLACES = "Places";
-	public static final String COLUMN_NAME_VISITED = "Visited";
-	public static final String COLUMN_NAME_CLUE = "Clue";
-    public static final String COLUMN_NAME_LAT = "Latitude";
-    public static final String COLUMN_NAME_LON = "Longitude";
-	public static final int DATABASE_VERSION = 1;
+	private static final String TABLE_NAME = "Clues_DB";
+	private static final String COLUMN_NAME_PLACES = "Places";
+	private static final String COLUMN_NAME_VISITED = "Visited";
+	private static final String COLUMN_NAME_CLUE = "Clue";
+    private static final String COLUMN_NAME_LAT = "Latitude";
+    private static final String COLUMN_NAME_LON = "Longitude";
+	private static final int DATABASE_VERSION = 1;
 	
 	private DbHelper ourHelper;
     private final Context ourContext;
     private SQLiteDatabase ourDatabase;
 	
 	private static class DbHelper extends SQLiteOpenHelper {
-        public DbHelper(Context context) {
+        private DbHelper(Context context) {
             super(context, TABLE_NAME, null, DATABASE_VERSION);
         }
 
