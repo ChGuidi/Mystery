@@ -1,6 +1,8 @@
 package cs.nuim.maps;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.media.MediaPlayer;
 import android.support.v7.app.AppCompatActivity;
@@ -9,7 +11,10 @@ import android.widget.TextView;
 
 public class SplashActivity extends AppCompatActivity {
 
+    private String filename = "GamePreferences";
     private MediaPlayer my_mediaPlayer;
+    SharedPreferences prefs;
+
 
     @Override
     protected void onPause() {
@@ -22,6 +27,8 @@ public class SplashActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
+
+        prefs = getSharedPreferences(filename, Context.MODE_PRIVATE);
 
         TextView tv = (TextView) findViewById(R.id.gametitle);
         Typeface font = Typeface.createFromAsset(getAssets(), "GypsyCurse.ttf");
@@ -37,9 +44,21 @@ public class SplashActivity extends AppCompatActivity {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 } finally {
-                    // TODO: change which screen is opened depending of the game is played before or not
-                    Intent openMain = new Intent(SplashActivity.this, StoryActivity.class);
-                    startActivity(openMain);
+                    if(prefs.getBoolean("played", false)) {
+                        Intent openMain = new Intent(SplashActivity.this, MapsActivity.class);
+
+                        // puts all info in database
+                        clueDb entry = new clueDb(SplashActivity.this);
+                        entry.setData();
+                        startActivity(openMain);
+                    } else {
+                        Intent openMain = new Intent(SplashActivity.this, StoryActivity.class);
+                        SharedPreferences.Editor editor = prefs.edit();
+                        editor.putBoolean("played",true);
+                        editor.apply();
+
+                        startActivity(openMain);
+                    }
                 }
             }
         };

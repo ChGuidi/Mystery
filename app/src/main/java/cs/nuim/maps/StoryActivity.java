@@ -30,6 +30,9 @@ public class StoryActivity extends AppCompatActivity {
         Button play = (Button) findViewById(R.id.buttonPlay);
         Typeface font2 = Typeface.createFromAsset(getAssets(), "GingerbreadHouse.ttf");
         play.setTypeface(font2);
+
+
+
     }
 
     public void toGame(View view) {
