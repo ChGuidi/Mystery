@@ -13,20 +13,15 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.UiSettings;
-import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.Circle;
 import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
-import com.google.android.gms.maps.model.Marker;
-import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.maps.android.SphericalUtil;
 
 import java.util.HashMap;
@@ -37,6 +32,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private GoogleMap mMap;
     private TextView tv;
     private static final Locations locations = new Locations();
+    private HashMap<String, LatLng> locationsVisited;
     private static final float MINZOOM = 14.7f;
     private Map<String, Circle> circles;
 
@@ -62,6 +58,20 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         circles = new HashMap<>();
         tv = (TextView) findViewById(R.id.textView);
+
+        //locationsVisited = new HashMap<>(locations);
+        ClueDb database = new ClueDb(this);
+        database.open();
+
+        locationsVisited = new HashMap<>();
+        for(String location : locations.keySet()) {
+            if(database.checkPlaceVisited(location)==0) {
+                locationsVisited.put(location, locations.get(location));
+            }
+        }
+
+        database.close();
+
     }
 
 
@@ -71,6 +81,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     
         // Enable location and check permissions
         ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+
         if (checkLocationPermission()) {
             mMap.setMyLocationEnabled(true);
         }
@@ -100,13 +111,21 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             // IDEE: make list with locations you want to check, if you're close enough remove location from list
             public void onLocationChanged(Location location) {
                 LatLng currentLoc = new LatLng(location.getLatitude(), location.getLongitude());
-                for(String cite : locations.keySet()) {
-                    if (SphericalUtil.computeDistanceBetween(currentLoc, locations.get(cite)) < 20) {
+                for(String cite : locationsVisited.keySet()) {
+                    if (SphericalUtil.computeDistanceBetween(currentLoc, locationsVisited.get(cite)) < 20) {
                         Intent intent = new Intent(getApplicationContext(), CloseActivity.class);
                         intent.putExtra("zoom", mMap.getCameraPosition().zoom + 1f);
                         startActivityForResult(intent, 1);
                         circles.get(cite).setFillColor(Color.GREEN);
-                        locations.remove(cite);
+                        circles.get(cite).setStrokeColor(Color.GREEN);
+                        locationsVisited.remove(cite);
+
+                        // Change visited in database
+                        ClueDb entry = new ClueDb(MapsActivity.this);
+                        entry.open();
+                        entry.markVisited(cite);
+                        entry.close();
+
                         break;
                     }
                 }
@@ -138,14 +157,23 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     public void putLocations() {
         // Instantiates a new CircleOptions object and defines the center and radius
-        // TODO: change color of dots based on Database! + HashMap with locations
         for(String s : locations.keySet()) {
-            CircleOptions circleOptions = new CircleOptions()
-                    .center(locations.get(s))
-                    .radius(3)
-                    .fillColor(Color.RED)
-                    .strokeColor(Color.RED)
-                    .clickable(true);
+            CircleOptions circleOptions;
+            if(locationsVisited.containsKey(s)) {
+                 circleOptions = new CircleOptions()
+                        .center(locations.get(s))
+                        .radius(3)
+                        .fillColor(Color.RED)
+                        .strokeColor(Color.RED)
+                        .clickable(true);
+            } else {
+                circleOptions = new CircleOptions()
+                        .center(locations.get(s))
+                        .radius(3)
+                        .fillColor(Color.GREEN)
+                        .strokeColor(Color.GREEN)
+                        .clickable(true);
+            }
 
             circles.put(s,mMap.addCircle(circleOptions));
             mMap.setOnCircleClickListener(new GoogleMap.OnCircleClickListener() {
@@ -163,10 +191,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 }
             });
         }
-       /* Marker melbourne = mMap.addMarker(new MarkerOptions()
-                .position(new LatLng(53.379333, -6.596350))
-                .title("Humanity House")
-                .snippet("On South Campus"));*/
     }
 
     public boolean checkLocationPermission() {

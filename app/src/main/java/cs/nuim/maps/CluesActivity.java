@@ -2,6 +2,7 @@ package cs.nuim.maps;
 
 import android.app.ActionBar;
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -55,6 +56,11 @@ public class CluesActivity extends FragmentActivity {
                 }
             }
         }
+    }
+
+    public void goBack(View view) {
+        Intent intent = new Intent(this, MapsActivity.class);
+        startActivity(intent);
     }
 }
 

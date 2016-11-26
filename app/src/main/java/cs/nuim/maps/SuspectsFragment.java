@@ -24,7 +24,7 @@ import java.util.List;
 
 public class SuspectsFragment extends Fragment {
 
-    private List<String> suspects = Arrays.asList("Dr. White", "Janitor Green", "Dean Plum", "Scarlet", "Nurse White", "Dr.Peacock");
+    private List<String> suspects = Arrays.asList("Dr. White", "Janitor Green", "Dean Plum", "Scarlet", "Nurse White", "Dr. Peacock");
     private TableLayout table;
 
     @Override
@@ -44,6 +44,9 @@ public class SuspectsFragment extends Fragment {
 
         table = (TableLayout) rootView.findViewById(R.id.table);
 
+        ClueDb clueDb = new ClueDb(getActivity());
+        clueDb.open();
+
         for(String suspect: suspects) {
             TableRow row = new TableRow(getContext());
             TextView name = new TextView(getContext());
@@ -54,16 +57,21 @@ public class SuspectsFragment extends Fragment {
             row.addView(name);
 
             TextView seen = new TextView(getContext());
-            seen.setText("X");
-            seen.setTextColor(Color.RED);
+            if(clueDb.checkClueFound(suspect)==1) {
+                seen.setText("X");
+                seen.setTextColor(Color.RED);
+            } else {
+                seen.setText("?");
+                seen.setTextColor(Color.DKGRAY);
+            }
+
             seen.setTypeface(font);
             seen.setTextSize(30);
-
             row.addView(seen);
             table.addView(row);
         }
 
-
+        clueDb.close();
         return rootView;
     }
 }

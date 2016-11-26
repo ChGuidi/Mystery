@@ -47,15 +47,16 @@ public class SplashActivity extends AppCompatActivity {
                     if(prefs.getBoolean("played", false)) {
                         Intent openMain = new Intent(SplashActivity.this, MapsActivity.class);
 
-                        // puts all info in database
-                        clueDb entry = new clueDb(SplashActivity.this);
-                        entry.setData();
                         startActivity(openMain);
                     } else {
                         Intent openMain = new Intent(SplashActivity.this, StoryActivity.class);
                         SharedPreferences.Editor editor = prefs.edit();
                         editor.putBoolean("played",true);
                         editor.apply();
+
+                        // puts all info in database
+                        ClueDb entry = new ClueDb(SplashActivity.this);
+                        entry.setData();
 
                         startActivity(openMain);
                     }

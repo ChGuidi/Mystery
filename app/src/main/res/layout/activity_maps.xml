@@ -15,6 +15,7 @@
         android:text="@string/looking_for_clues"
         android:layout_gravity="center_horizontal"
         android:textSize="50dp"
+        android:textColor="#FFFFFF"
         android:textStyle="bold"
         android:layout_marginTop="20dp"
         android:id="@+id/looking" />

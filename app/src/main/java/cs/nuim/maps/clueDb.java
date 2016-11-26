@@ -11,7 +11,7 @@ import android.database.sqlite.SQLiteOpenHelper;
  * Created by kacl2 on 11/19/2016.
  */
 
-public class clueDb {
+public class ClueDb {
 	
 	private static final String TABLE_NAME = "Clues_DB";
 	private static final String COLUMN_NAME_PLACES = "Places";
@@ -24,12 +24,25 @@ public class clueDb {
 	private DbHelper ourHelper;
     private final Context ourContext;
     private SQLiteDatabase ourDatabase;
-	
+
 	private static class DbHelper extends SQLiteOpenHelper {
+
+        private static DbHelper sInstance;
+
         private DbHelper(Context context) {
             super(context, TABLE_NAME, null, DATABASE_VERSION);
         }
 
+        public static synchronized DbHelper getInstance(Context context) {
+
+            // Use the application context, which will ensure that you
+            // don't accidentally leak an Activity's context.
+            // See this article for more information: http://bit.ly/6LRzfx
+            if (sInstance == null) {
+                sInstance = new DbHelper(context.getApplicationContext());
+            }
+            return sInstance;
+        }
 
         public void onCreate(SQLiteDatabase db) {
             db.execSQL("CREATE TABLE " + TABLE_NAME + " (" +
@@ -47,15 +60,18 @@ public class clueDb {
         }
     }
 
-    public clueDb(Context c){
+    public ClueDb(Context c){
         ourContext = c;
     }
 
-    public clueDb open() throws SQLException {
-        ourHelper = new DbHelper(ourContext);
+
+
+    public ClueDb open() throws SQLException {
+        ourHelper = DbHelper.getInstance(ourContext);
         ourDatabase = ourHelper.getWritableDatabase();  //will call onCreate() or onUpgrade() or onOpen() above
         return this;
     }
+
     public void close(){
         ourHelper.close();
     }
@@ -128,8 +144,20 @@ public class clueDb {
 
     public void setData(){
         open();
-        createEntry("HUMANITY HOUSE", "knife", 53.379333, -6.59635);
-        createEntry("MARYS HOUSE", "bat", 53.378992, -6.599074);
+        createEntry("HUMANITY HOUSE", "butcherknife", 53.379333, -6.59635);
+        createEntry("MARYS HOUSE", "arrow", 53.378992, -6.599074);
+        createEntry("LOGIC HOUSE", "Dr. White", 53.378128, -6.596220);
+        createEntry("LIBRARY", "Janitor Green", 53.381181, -6.599524);
+        createEntry("SCIENCE BUILDING", "Dean Plum", 53.383178, -6.600479);
+        createEntry("JOHN HUME", "Scarlet", 53.383984, -6.600361);
+        createEntry("ARTS BUILDING", "Nurse White", 53.383613, -6.601960);
+        createEntry("CALLAN BUILDING", "Dr. Peacock", 53.382557, -6.602334);
+        createEntry("STUDENTS UNION", "leadpipe", 53.383066, -6.603628);
+        createEntry("EOLAS", "chandelier", 53.384532, -6.601702);
+        createEntry("PHOENIX", "revolver", 53.384289, -6.603676);
+        createEntry("AULA MAXIMA", "rope", 53.380219, -6.597786);
+        createEntry("NEW HOUSE", "bat", 53.380163, -6.597047);
+
         close();
     }
 }

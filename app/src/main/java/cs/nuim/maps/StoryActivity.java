@@ -32,7 +32,6 @@ public class StoryActivity extends AppCompatActivity {
         play.setTypeface(font2);
 
 
-
     }
 
     public void toGame(View view) {

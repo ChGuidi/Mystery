@@ -1,6 +1,7 @@
 package cs.nuim.maps;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -48,8 +49,10 @@ public class ImageAdapter extends BaseAdapter {
         return imageView;
     }
 
+    public void setmThumbIds(Integer[] mThumbIdStrings){
+        mThumbIds = mThumbIdStrings;
+    }
+
     // references to our images
-    private Integer[] mThumbIds = {
-            R.drawable.blurryknife, R.drawable.butcherknife, R.drawable.blurryknife, R.drawable.blurryknife, R.drawable.blurryknife, R.drawable.blurryknife
-    };
+    private Integer[] mThumbIds;
 }
