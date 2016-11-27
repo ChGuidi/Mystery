@@ -14,6 +14,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.ActionBarOverlayLayout;
+import android.widget.Button;
 import android.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -43,6 +44,10 @@ public class CluesActivity extends FragmentActivity {
         tabLayout.setupWithViewPager(mViewPager);
 
         ViewGroup vg = (ViewGroup) tabLayout.getChildAt(0);
+
+        Button goBack = (Button) findViewById(R.id.goBack);
+        Typeface font2 = Typeface.createFromAsset(getAssets(), "GingerbreadHouse.ttf");
+        goBack.setTypeface(font2);
 
         Typeface font = Typeface.createFromAsset(getAssets(), "SEVESBRG.TTF");
         int tabsCount = vg.getChildCount();

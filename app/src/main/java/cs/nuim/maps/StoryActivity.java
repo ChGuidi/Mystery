@@ -2,6 +2,7 @@ package cs.nuim.maps;
 
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
@@ -30,6 +31,9 @@ public class StoryActivity extends AppCompatActivity {
         Button play = (Button) findViewById(R.id.buttonPlay);
         Typeface font2 = Typeface.createFromAsset(getAssets(), "GingerbreadHouse.ttf");
         play.setTypeface(font2);
+
+        // Enable location and check permissions
+        ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION}, 1);
 
 
     }
