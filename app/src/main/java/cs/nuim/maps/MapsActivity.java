@@ -40,6 +40,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
+
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
@@ -59,7 +60,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         circles = new HashMap<>();
         tv = (TextView) findViewById(R.id.textView);
 
-        //locationsVisited = new HashMap<>(locations);
+
         ClueDb database = new ClueDb(this);
         database.open();
 
@@ -72,15 +73,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         database.close();
 
+
     }
 
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-    
-        // Enable location and check permissions
-        ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION}, 1);
 
         if (checkLocationPermission()) {
             mMap.setMyLocationEnabled(true);
@@ -115,14 +114,17 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     if (SphericalUtil.computeDistanceBetween(currentLoc, locationsVisited.get(cite)) < 20) {
                         Intent intent = new Intent(getApplicationContext(), CloseActivity.class);
                         intent.putExtra("zoom", mMap.getCameraPosition().zoom + 1f);
+
+                        ClueDb entry = new ClueDb(MapsActivity.this);
+                        entry.open();
+                        String clueFound = entry.getClue(cite);
+                        intent.putExtra("clue", clueFound);
                         startActivityForResult(intent, 1);
                         circles.get(cite).setFillColor(Color.GREEN);
                         circles.get(cite).setStrokeColor(Color.GREEN);
                         locationsVisited.remove(cite);
 
                         // Change visited in database
-                        ClueDb entry = new ClueDb(MapsActivity.this);
-                        entry.open();
                         entry.markVisited(cite);
                         entry.close();
 
@@ -220,4 +222,5 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         Intent intent = new Intent(this, RulesActivity.class);
         startActivity(intent);
     }
+
 }

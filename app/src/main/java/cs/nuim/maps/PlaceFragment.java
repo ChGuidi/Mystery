@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 public class PlaceFragment extends Fragment {
 
+    private String placeName = "New House";
     @Override
     public View onCreateView(LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -23,6 +24,17 @@ public class PlaceFragment extends Fragment {
         TextView tv = (TextView) rootView.findViewById(R.id.crimescene);
         Typeface font = Typeface.createFromAsset(getActivity().getAssets(), "SEVESBRG.TTF");
 
+        TextView place = (TextView) rootView.findViewById(R.id.crimesign);
+        Typeface font2 = Typeface.createFromAsset(getActivity().getAssets(), "FiddumsFamily.ttf");
+        place.setTypeface(font2);
+
+        ClueDb clueDb = new ClueDb(getActivity());
+        clueDb.open();
+        if (clueDb.checkClueFound(placeName) == 1) {
+            place.setText(placeName);
+            place.setTextSize(50);
+        }
+        clueDb.close();
         tv.setTypeface(font);
         return rootView;
     }

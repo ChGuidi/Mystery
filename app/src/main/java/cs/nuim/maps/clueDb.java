@@ -2,10 +2,15 @@ package cs.nuim.maps;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * Created by kacl2 on 11/19/2016.
@@ -144,7 +149,7 @@ public class ClueDb {
 
     public void setData(){
         open();
-        createEntry("HUMANITY HOUSE", "butcherknife", 53.379333, -6.59635);
+        /*createEntry("HUMANITY HOUSE", "butcherknife", 53.379333, -6.59635);
         createEntry("MARYS HOUSE", "arrow", 53.378992, -6.599074);
         createEntry("LOGIC HOUSE", "Dr. White", 53.378128, -6.596220);
         createEntry("LIBRARY", "Janitor Green", 53.381181, -6.599524);
@@ -156,7 +161,18 @@ public class ClueDb {
         createEntry("EOLAS", "chandelier", 53.384532, -6.601702);
         createEntry("PHOENIX", "revolver", 53.384289, -6.603676);
         createEntry("AULA MAXIMA", "rope", 53.380219, -6.597786);
-        createEntry("NEW HOUSE", "bat", 53.380163, -6.597047);
+        createEntry("NEW HOUSE", "New House", 53.380163, -6.597047);*/
+
+        Locations locations = new Locations();
+
+        List<String> clues = Arrays.asList("butcherknife", "arrow", "Dr. Mustard", "Janitor Green", "Dean Plum",
+                "Scarlet", "Nurse White", "Dr. Peacock", "leadpipe", "chandelier", "revolver", "rope", "New House");
+
+        int i = 0;
+        for(String s : locations.keySet()) {
+            createEntry(s,clues.get(i),locations.get(s).latitude,locations.get(s).longitude);
+            i++;
+        }
 
         close();
     }

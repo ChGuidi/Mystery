@@ -52,7 +52,6 @@ public class WeaponFragment extends Fragment {
         for (int i = 0 ; i< imageIDs.length; i++){
             String image;
             String clue = weapons.get(i);
-            System.out.println(database.getClue("HUMANITY HOUSE"));
             if (database.checkClueFound(clue)==0) {
                 image = "blurry" + clue;
             } else {
