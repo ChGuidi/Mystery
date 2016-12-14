@@ -206,6 +206,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             if(resultCode == RESULT_OK) {
                 Float zoom = data.getFloatExtra("zoom",MINZOOM);
                 mMap.animateCamera(CameraUpdateFactory.zoomTo(zoom));
+               // mMap.animateCamera(CameraUpdateFactory.newLatLng());
             }
         }
     }
