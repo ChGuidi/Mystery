@@ -114,14 +114,17 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     if (SphericalUtil.computeDistanceBetween(currentLoc, locationsVisited.get(cite)) < 20) {
                         Intent intent = new Intent(getApplicationContext(), CloseActivity.class);
                         intent.putExtra("zoom", mMap.getCameraPosition().zoom + 1f);
+
+                        ClueDb entry = new ClueDb(MapsActivity.this);
+                        entry.open();
+                        String clueFound = entry.getClue(cite);
+                        intent.putExtra("clue", clueFound);
                         startActivityForResult(intent, 1);
                         circles.get(cite).setFillColor(Color.GREEN);
                         circles.get(cite).setStrokeColor(Color.GREEN);
                         locationsVisited.remove(cite);
 
                         // Change visited in database
-                        ClueDb entry = new ClueDb(MapsActivity.this);
-                        entry.open();
                         entry.markVisited(cite);
                         entry.close();
 
@@ -220,4 +223,5 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         Intent intent = new Intent(this, RulesActivity.class);
         startActivity(intent);
     }
+
 }

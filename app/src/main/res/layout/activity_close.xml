@@ -1,19 +1,50 @@
-<LinearLayout xmlns:tools="http://schemas.android.com/tools"
-    android:layout_height="wrap_content"
-    android:layout_width="wrap_content"
-    android:layout_gravity="center_vertical"
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_close"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
     android:orientation="vertical"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:weightSum="1">
+    android:padding="20dp"
+    android:gravity="center"
+    android:background="@color/niceRed">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Close enough!"/>
-
-    <Button
-        android:text="Return"
+    <RelativeLayout android:background="@drawable/bg"
+        android:padding="7dp"
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/returnButton" />
+        android:layout_height="match_parent"
+        android:gravity="center">
+        <ImageView
+            android:layout_centerHorizontal="true"
+            android:id="@+id/clueFound"
+            android:adjustViewBounds="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/foundText"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:textSize="18dp"
+            android:textColor="#000000"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="35dp"
+            android:layout_below="@+id/clueFound"
+            android:layout_centerHorizontal="true" />
+
+        <Button
+            android:textSize="10dp"
+            android:text="Return to Quest"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/returnbutton"
+            android:textColor="#FFFFFF"
+            android:id="@+id/returnButton"
+            android:layout_below="@+id/foundText"
+            android:layout_centerHorizontal="true"
+            android:padding="10dp"
+            android:layout_marginTop="12dp" />
+    </RelativeLayout>
 </LinearLayout>

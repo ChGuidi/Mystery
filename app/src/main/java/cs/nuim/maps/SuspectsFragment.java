@@ -24,7 +24,7 @@ import java.util.List;
 
 public class SuspectsFragment extends Fragment {
 
-    private List<String> suspects = Arrays.asList("Dr. White", "Janitor Green", "Dean Plum", "Scarlet", "Nurse White", "Dr. Peacock");
+    private List<String> suspects = Arrays.asList("Dr. Mustard", "Janitor Green", "Dean Plum", "Scarlet", "Nurse White", "Dr. Peacock");
     private TableLayout table;
 
     @Override
