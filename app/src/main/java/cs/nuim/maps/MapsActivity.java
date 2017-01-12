@@ -28,8 +28,6 @@ import com.google.maps.android.SphericalUtil;
 import java.util.HashMap;
 import java.util.Map;
 
-import static java.security.AccessController.getContext;
-import static java.sql.DriverManager.println;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
@@ -50,6 +48,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
+        // Change fonts
         TextView looking = (TextView) findViewById(R.id.looking);
         Typeface font = Typeface.createFromAsset(getAssets(), "youmurdererbb_reg.ttf");
         looking.setTypeface(font);
@@ -64,10 +63,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         circles = new HashMap<>();
         tv = (TextView) findViewById(R.id.textView);
 
-
         ClueDb database = new ClueDb(this);
         database.open();
 
+        // Save map with not yet visited locations out of database
         notVisited = new HashMap<>();
         for(String location : locations.keySet()) {
             if(database.checkPlaceVisited(location)==0) {
@@ -85,10 +84,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
+        // Show location on map
         if (checkLocationPermission()) {
             mMap.setMyLocationEnabled(true);
         }
 
+        // Get zoom possibility
         mMap.getUiSettings().setZoomControlsEnabled(true);
 
 
@@ -111,7 +112,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void checkNearby() {
         LocationListener locationListener = new LocationListener() {
             @Override
-            // IDEE: make list with locations you want to check, if you're close enough remove location from list
+            // List with locations you still have to check, if you're close enough remove location from list
             public void onLocationChanged(Location location) {
                 LatLng currentLoc = new LatLng(location.getLatitude(), location.getLongitude());
                 if(notVisited.size()==0){ //if all locations have been visited
@@ -164,6 +165,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             }
         };
 
+        // control the changing of the location and react on it
         LocationManager mLocationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
         if (checkLocationPermission()) {
             mLocationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0,
@@ -174,6 +176,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     }
 
+    // Add locations to the map as circles
     public void putLocations() {
         // Instantiates a new CircleOptions object and defines the center and radius
         for(String s : locations.keySet()) {

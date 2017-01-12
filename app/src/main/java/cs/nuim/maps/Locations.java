@@ -14,24 +14,8 @@ import java.util.Map;
 
 public class Locations extends HashMap<String,LatLng>{
 
-   /* public Locations(){
-        this.put("HUMANITY HOUSE", new LatLng(39.761562, -83.988017));
-        //this.put("MARYS HOUSE", new LatLng(53.378992, -83.98824000000002));
-        this.put("LOGIC HOUSE", new LatLng(39.761562, -83.988017));
-        this.put("LIBRARY", new LatLng(39.761562, -83.988017));
-        this.put("SCIENCE BUILDING", new LatLng(39.761562, -83.988017));
-        this.put("JOHN HUME",new LatLng(39.761562, -83.988017));
-        this.put("ARTS BUILDING", new LatLng(39.761562, -83.988017));
-        this.put("CALLAN BUILDING", new LatLng(39.761562, -83.988017));
-        this.put("STUDENTS UNION", new LatLng(39.761562, -83.988017));
-        this.put("EOLAS", new LatLng(39.761562, -83.988017));
-        this.put("PHOENIX", new LatLng(39.761562, -83.988017));
-        this.put("AULA MAXIMA", new LatLng(39.761562, -83.988017));
-        //this.put("NEW HOUSE", new LatLng(53.380163, -6.597047));
-    }*/
     public Locations() {
         this.put("HUMANITY HOUSE", new LatLng(53.379333, -6.596350));
-        //this.put("MARYS HOUSE", new LatLng(53.378992, -6.599074));
         this.put("LOGIC HOUSE", new LatLng(53.378128, -6.596220));
         this.put("LIBRARY", new LatLng(53.381181, -6.599524));
         this.put("SCIENCE BUILDING", new LatLng(53.383178, -6.600479));

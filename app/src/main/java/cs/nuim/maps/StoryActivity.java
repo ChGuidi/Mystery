@@ -26,6 +26,8 @@ public class StoryActivity extends AppCompatActivity {
         story =(TextView) findViewById(R.id.textStory);
         Typeface font3 = Typeface.createFromAsset(getAssets(), "LikeCockatoosBold.ttf");
         story.setTypeface(font3);
+
+        // Give the textview the possibility to scroll
         story.setMovementMethod(new ScrollingMovementMethod());
 
         Button play = (Button) findViewById(R.id.buttonPlay);

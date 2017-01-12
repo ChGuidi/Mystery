@@ -10,6 +10,7 @@ import android.widget.ImageView;
 
 /**
  * Created by Chloë on 19/11/2016.
+ * Class that adapts gridview by adding images
  */
 public class ImageAdapter extends BaseAdapter {
     private Context mContext;
@@ -49,6 +50,7 @@ public class ImageAdapter extends BaseAdapter {
         return imageView;
     }
 
+    // set all the images you should use for the gric
     public void setmThumbIds(Integer[] mThumbIdStrings){
         mThumbIds = mThumbIdStrings;
     }

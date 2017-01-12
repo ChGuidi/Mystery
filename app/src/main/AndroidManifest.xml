@@ -41,7 +41,7 @@
         <activity
             android:name=".CloseActivity"
             android:label="@string/title_activity_close"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoTitlebar" />
         <activity android:name=".CluesActivity"
             android:theme="@style/AppTheme.NoTitlebar"/>
         <activity android:name=".RulesActivity"
@@ -53,7 +53,12 @@
         <activity
             android:name=".SplashActivity"
             android:label="@string/title_activity_splash"
+
             android:theme="@style/AppTheme.NoTitlebar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+            </intent-filter>
+
         </activity>
         <activity
             android:name=".StoryActivity"
@@ -63,12 +68,17 @@
             android:theme="@style/AppTheme.NoTitlebar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity android:name=".VictoryActivity"
-            android:theme="@style/AppTheme.NoTitlebar"/>
+            android:theme="@style/AppTheme.NoTitlebar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+
+            </intent-filter>
+            </activity>
+
     </application>
 
 </manifest>

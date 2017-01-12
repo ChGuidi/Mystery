@@ -17,6 +17,7 @@ public class PlaceFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
+
         // The last two arguments ensure LayoutParams are inflated
         // properly.
         View rootView = inflater.inflate(
@@ -33,10 +34,12 @@ public class PlaceFragment extends Fragment {
         placeName = prefs.getString("Crime Scene", "PROBLEM");
         ClueDb clueDb = new ClueDb(getActivity());
         clueDb.open();
+
         if (clueDb.checkPlaceVisited(placeName) == 1) {
             place.setText(placeName);
             place.setTextSize(50);
         }
+
         clueDb.close();
         tv.setTypeface(font);
         return rootView;

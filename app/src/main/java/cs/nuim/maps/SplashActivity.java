@@ -51,6 +51,7 @@ public class SplashActivity extends AppCompatActivity {
                     } else {
                         Intent openMain = new Intent(SplashActivity.this, StoryActivity.class);
                         SharedPreferences.Editor editor = prefs.edit();
+                        // Save if the game is already played or not
                         editor.putBoolean("played",true);
                         editor.apply();
 

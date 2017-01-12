@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.PorterDuff;
+import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -13,6 +14,8 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import org.w3c.dom.Text;
 
 import java.util.Arrays;
 
@@ -36,11 +39,25 @@ public class EndActivity extends AppCompatActivity {
 
         submitEnd = (Button)findViewById(R.id.submitEnd);
 
+        TextView title = (TextView) findViewById(R.id.titleMystery);
+        Typeface font2 = Typeface.createFromAsset(getAssets(), "youmurdererbb_reg.ttf");
+        title.setTypeface(font2);
+
+        Typeface font = Typeface.createFromAsset(getAssets(), "GingerbreadHouse.ttf");
+
+        TextView weapon = (TextView) findViewById(R.id.weapon);
+        Typeface font3 =  Typeface.createFromAsset(getAssets(),"LikeCockatoosBold.ttf");
+        TextView murderer = (TextView) findViewById(R.id.murderer);
+        weapon.setTypeface(font);
+        murderer.setTypeface(font);
+
         //Set text to reflect the crime scene/ guessing location
         String filename = "GamePreferences";
         SharedPreferences prefs = getSharedPreferences(filename,Context.MODE_PRIVATE);
         String crimeScene = prefs.getString("Crime Scene", "PROBLEM");
         TextView crimeText = (TextView)findViewById(R.id.crimeText);
+
+        crimeText.setTypeface(font);
         crimeText.setText(crimeScene);
     }
 
@@ -50,6 +67,7 @@ public class EndActivity extends AppCompatActivity {
         return new String[]{ prefs.getString("Killer", "PROBLEM"),
                 prefs.getString("Murder Weapon", "PROBLEM") };
     }
+
     public void checkSubmit(View view){//checks if guess is correct or false
         String weaponChoice = wepspin.getSelectedItem().toString();
         String suspectChoice = susspin.getSelectedItem().toString();
