@@ -7,8 +7,23 @@
     <string name="looking_for_clues">Look for clues...</string>
     <string name="title_activity_clues2">Clues2Activity</string>
     <string name="action_settings">Settings</string>
-    <string name="section_format">Hello World from section: %1$d</string>
     <string name="location">Location</string>
+    <string-array name="weapons_array">
+        <item>butcherknife</item>
+        <item>arrow</item>
+        <item>chandelier</item>
+        <item>revolver</item>
+        <item>rope</item>
+        <item>leadpipe</item>
+    </string-array>
+    <string-array name="suspects_array">
+        <item>Dr. Mustard</item>
+        <item>Janitor Green</item>
+        <item>Dean Plum</item>
+        <item>Scarlet</item>
+        <item>Nurse White</item>
+        <item>Dr. Peacock</item>
+    </string-array>
     <string name="suspects">Suspects</string>
     <string name="dr_white">Dr. White</string>
     <string name="janitor_green">Janitor Green</string>
@@ -22,4 +37,19 @@
     <string name="play">Play</string>
     <string name="what_happened">What happened...</string>
     <string name="goBack">Go back</string>
+    <string name="ruleText">To win, you must visit all 13 locations on the map of Maynooth. They will
+        be marked with red circles before you visit them, and marked green after you visit them. Each
+        location will either identify itself as the crime scene, or eliminate a weapon or suspect.\n\t
+        Once you have visited all locations, return to the location identified as the crime scene
+        and fill in the suspect and weapon which you DID NOT find at any location. </string>
+    <string name="storyText">In the middle of the night, you awake with a start to the sound of a blood-
+        curdling scream in the distance. Frightened, you make sure that your door and window are locked.
+        You peer out the window, but see nothing, and return to bed uneasily. The next morning, you
+        still wonder what the source of the scream was. You wish that you could ask your flatmates if they
+        heard anything, but campus is almost entirely empty since it is study week. \n\tOn the way to the library,
+        you see a number of Gardai, which is peculiar. After seeing a fifth garda, you stop to ask
+        why there are so many on campus. He answers \"Oh, just some rowdy kids. Nothing to worry about.\"
+        You\'re certain that there\'s a cover-up going on, since the last time you saw even one garda in
+        Maynooth was- Well, long enough ago that you can\'t recall.\n\t
+        There\'s a murderer on the loose, and only you can stop him.</string>
 </resources>

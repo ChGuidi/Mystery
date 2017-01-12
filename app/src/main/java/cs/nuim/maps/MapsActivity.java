@@ -1,6 +1,7 @@
 package cs.nuim.maps;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.Typeface;
@@ -27,12 +28,15 @@ import com.google.maps.android.SphericalUtil;
 import java.util.HashMap;
 import java.util.Map;
 
+import static java.security.AccessController.getContext;
+import static java.sql.DriverManager.println;
+
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
     private TextView tv;
     private static final Locations locations = new Locations();
-    private HashMap<String, LatLng> locationsVisited;
+    private HashMap<String, LatLng> notVisited;
     private static final float MINZOOM = 14.7f;
     private Map<String, Circle> circles;
 
@@ -64,10 +68,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         ClueDb database = new ClueDb(this);
         database.open();
 
-        locationsVisited = new HashMap<>();
+        notVisited = new HashMap<>();
         for(String location : locations.keySet()) {
             if(database.checkPlaceVisited(location)==0) {
-                locationsVisited.put(location, locations.get(location));
+                notVisited.put(location, locations.get(location));
             }
         }
 
@@ -110,8 +114,19 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             // IDEE: make list with locations you want to check, if you're close enough remove location from list
             public void onLocationChanged(Location location) {
                 LatLng currentLoc = new LatLng(location.getLatitude(), location.getLongitude());
-                for(String cite : locationsVisited.keySet()) {
-                    if (SphericalUtil.computeDistanceBetween(currentLoc, locationsVisited.get(cite)) < 20) {
+                if(notVisited.size()==0){ //if all locations have been visited
+                    SharedPreferences prefs=getApplicationContext().getSharedPreferences("GamePreferences",0);
+                    SharedPreferences.Editor editor = prefs.edit();
+                    String crimeScene = prefs.getString("Crime Scene", "PROBLEM");
+                    //if within range of crime scene
+                    if (SphericalUtil.computeDistanceBetween(currentLoc, locations.get(crimeScene)) < 20){
+                        //bring to guessing screen
+                        Intent endIntent = new Intent(getBaseContext(), EndActivity.class);
+                        startActivity(endIntent);
+                    }
+                }
+                for(String cite : notVisited.keySet()) {
+                    if (SphericalUtil.computeDistanceBetween(currentLoc, notVisited.get(cite)) < 20) {
                         Intent intent = new Intent(getApplicationContext(), CloseActivity.class);
                         intent.putExtra("zoom", mMap.getCameraPosition().zoom + 1f);
 
@@ -122,7 +137,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         startActivityForResult(intent, 1);
                         circles.get(cite).setFillColor(Color.GREEN);
                         circles.get(cite).setStrokeColor(Color.GREEN);
-                        locationsVisited.remove(cite);
+                        notVisited.remove(cite);
 
                         // Change visited in database
                         entry.markVisited(cite);
@@ -153,6 +168,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         if (checkLocationPermission()) {
             mLocationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0,
                     1, locationListener);
+            mLocationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0,
+                    1, locationListener);
         }
 
     }
@@ -161,7 +178,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         // Instantiates a new CircleOptions object and defines the center and radius
         for(String s : locations.keySet()) {
             CircleOptions circleOptions;
-            if(locationsVisited.containsKey(s)) {
+            if(notVisited.containsKey(s)) {
                  circleOptions = new CircleOptions()
                         .center(locations.get(s))
                         .radius(3)

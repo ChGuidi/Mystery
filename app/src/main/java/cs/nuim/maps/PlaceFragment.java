@@ -1,5 +1,7 @@
 package cs.nuim.maps;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
@@ -11,7 +13,7 @@ import android.widget.TextView;
 
 public class PlaceFragment extends Fragment {
 
-    private String placeName = "New House";
+    private String placeName;
     @Override
     public View onCreateView(LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -27,10 +29,11 @@ public class PlaceFragment extends Fragment {
         TextView place = (TextView) rootView.findViewById(R.id.crimesign);
         Typeface font2 = Typeface.createFromAsset(getActivity().getAssets(), "FiddumsFamily.ttf");
         place.setTypeface(font2);
-
+        SharedPreferences prefs = getActivity().getSharedPreferences("GamePreferences", Context.MODE_PRIVATE);
+        placeName = prefs.getString("Crime Scene", "PROBLEM");
         ClueDb clueDb = new ClueDb(getActivity());
         clueDb.open();
-        if (clueDb.checkClueFound(placeName) == 1) {
+        if (clueDb.checkPlaceVisited(placeName) == 1) {
             place.setText(placeName);
             place.setTextSize(50);
         }

@@ -8,6 +8,8 @@
          location permissions for the 'MyLocation' functionality. 
     -->
     <uses-permission android:name="android.permission.INTERNET" />
+    <permission android:name="cs.nuim.maps.permission.MAPS_RECEIVE" android:protectionLevel="signature" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
@@ -40,22 +42,33 @@
             android:name=".CloseActivity"
             android:label="@string/title_activity_close"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".CluesActivity" />
-        <activity android:name=".RulesActivity" />
-        <activity android:name=".WeaponFragment" />
-        <activity android:name=".PlaceFragment" />
+        <activity android:name=".CluesActivity"
+            android:theme="@style/AppTheme.NoTitlebar"/>
+        <activity android:name=".RulesActivity"
+            android:theme="@style/AppTheme.NoTitlebar"/>
+        <activity android:name=".WeaponFragment"
+            android:theme="@style/AppTheme.NoTitlebar"/>
+        <activity android:name=".PlaceFragment"
+            android:theme="@style/AppTheme.NoTitlebar"/>
         <activity
             android:name=".SplashActivity"
             android:label="@string/title_activity_splash"
             android:theme="@style/AppTheme.NoTitlebar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".StoryActivity"
-            android:theme="@style/AppTheme.NoTitlebar"></activity>
+            android:theme="@style/AppTheme.NoTitlebar" />
+        <activity
+            android:name=".EndActivity"
+            android:theme="@style/AppTheme.NoTitlebar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".VictoryActivity"
+            android:theme="@style/AppTheme.NoTitlebar"/>
     </application>
 
 </manifest>
